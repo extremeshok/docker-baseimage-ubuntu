@@ -1,2 +1,2 @@
 #!/bin/execlineb -P
-exec cron
+exec cron -f -l -L 4
