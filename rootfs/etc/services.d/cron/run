@@ -1,2 +1,2 @@
 #!/bin/execlineb -P
-exec crond -f
+exec cron
