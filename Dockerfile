@@ -19,7 +19,8 @@ RUN \
     ca-certificates \
     curl \
     cron \
-    tar
+    tar \
+    wget
 
 RUN \
   echo "**** install s6 overlay ****" \
