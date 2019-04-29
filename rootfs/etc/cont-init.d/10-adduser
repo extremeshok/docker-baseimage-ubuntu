@@ -1,0 +1,20 @@
+#!/usr/bin/with-contenv sh
+
+PUID=${PUID:-911}
+PGID=${PGID:-911}
+
+groupmod -o -g "$PGID" xs
+usermod -o -u "$PUID" xs
+
+echo "
+-------------------------------------
+This system is optimised by:
+ https://eXtremeSHOK.com
+-------------------------------------
+User xs uid:    $(id -u xs)
+User xs gid:    $(id -g xs)
+-------------------------------------
+"
+chown xs:xs /app
+chown xs:xs /config
+chown xs:xs /defaults
