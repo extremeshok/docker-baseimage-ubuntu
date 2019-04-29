@@ -48,7 +48,8 @@ RUN \
   && mkdir -p \
     /app \
     /config \S6VERSION \
-    /defaults
+    /defaults \
+    /etc/cron.d
 
 RUN \
   echo "**** cleanup ****" \
