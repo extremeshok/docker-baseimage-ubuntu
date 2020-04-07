@@ -2,8 +2,16 @@ FROM ubuntu:18.04 AS BUILD
 
 LABEL mantainer="Adrian Kriel <admin@extremeshok.com>" vendor="eXtremeSHOK.com"
 
+USER root
+
 # build time varbiles
 ARG OVERLAY_ARCH="amd64"
+
+# ENFORCE en_us UTF8
+ENV SHELL=/bin/bash \
+  LC_ALL=en_US.UTF-8 \
+  LANG=en_US.UTF-8 \
+  LANGUAGE=en_US.UTF-8
 
 # environment variables
 ENV PS1="[$(whoami)@$(hostname):$(pwd)]$ "
@@ -12,6 +20,11 @@ ENV HOME="/root"
 ENV TERM="xterm"
 
 ENV DEBIAN_FRONTEND="noninteractive"
+
+RUN echo "**** Set local to en_US.UTF8 ****" \
+  && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+  && locale-gen
+
 
 RUN \
   echo "**** install packages ****" \
