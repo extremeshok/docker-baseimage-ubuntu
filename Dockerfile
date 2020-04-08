@@ -21,17 +21,12 @@ ENV TERM="xterm"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
-RUN echo "**** Set local to en_US.UTF8 ****" \
-  && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-  && locale-gen
-
-
 RUN \
   echo "**** install packages ****" \
   && apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    curl \
     cron \
+    curl \
     tar \
     wget
 
