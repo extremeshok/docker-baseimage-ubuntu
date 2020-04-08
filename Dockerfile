@@ -7,12 +7,6 @@ USER root
 # build time varbiles
 ARG OVERLAY_ARCH="amd64"
 
-# ENFORCE en_us UTF8
-ENV SHELL=/bin/bash \
-  LC_ALL=en_US.UTF-8 \
-  LANG=en_US.UTF-8 \
-  LANGUAGE=en_US.UTF-8
-
 # environment variables
 ENV PS1="[$(whoami)@$(hostname):$(pwd)]$ "
 #ENV PS1 "\h:\W \u$ "
