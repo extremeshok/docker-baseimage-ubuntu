@@ -9,6 +9,9 @@ eXtremeSHOK optimized base Ubuntu 18.04
 + [S6 overlay](https://github.com/just-containers/s6-overlay)
 + [socklog overlay](https://github.com/just-containers/socklog-overlay)
 
+# apt-install
+a custom command to replace the aapt-get install (apt-get update && apt-get install) command, which will also retry failed installs/downloads
+
 # Ubuntu linux LTS
 
 # S6 overlay
