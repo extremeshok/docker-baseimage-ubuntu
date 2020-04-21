@@ -17,7 +17,7 @@ sleep_between_retries=5
 apt-get update
 
 # save error message (stderr) to error and display output (stdout)
-until { error=$(apt-get -q -y -o Dpkg::Options::="--force-confmiss" -o DPkg::Options::="--force-confold" -o DPkg::Options::="--force-confdef" install --no-install-recommends "$@" 2>&1 1>&$out); } {out}>&1 >output ; do
+until { error=$(apt-get -q -y -o Dpkg::Options::="--force-confmiss" -o DPkg::Options::="--force-confold" -o DPkg::Options::="--force-confdef" install --no-install-recommends "$@" 2>&1 1>&$out); } {out}>&1 ; do
   ret="$?"
   if [[ "$error" == *"Unable to locate package"* ]] ; then
     echo "${error/E: /}"
