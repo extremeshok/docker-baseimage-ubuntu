@@ -3,12 +3,13 @@
 max_retries=30
 current_retries=0
 apt-get update
+
 until apt-get -q -y -o Dpkg::Options::="--force-confmiss" -o DPkg::Options::="--force-confold" -o DPkg::Options::="--force-confdef" install --no-install-recommends "$@"; do
-  ret="$?"
-  if [ "$ret" -eq "100" ] ; then
-    # package not found "Unable to locate package"
-    break
-  fi
+  # ret="$?"
+  # if [ "$ret" -eq "100" ] ; then
+  #   # package not found "Unable to locate package"
+  #   break
+  # fi
   current_retries=$((current_retries + 1))
   if [ $current_retries -gt $max_retries ] ; then
     echo "ERROR: max retries of ${max_retries} reached"
@@ -18,3 +19,27 @@ until apt-get -q -y -o Dpkg::Options::="--force-confmiss" -o DPkg::Options::="--
   sleep 5
 done
 apt-get clean
+# 
+# OUTPUT="";
+# while [ ""`echo $OUTPUT | grep -c somestring` != 0 ]; do
+#   result="$(apt-get -q -y -o Dpkg::Options::="--force-confmiss" -o DPkg::Options::="--force-confold" -o DPkg::Options::="--force-confdef" install --no-install-recommends "$@")"
+# done
+#
+#
+#
+# until [ "$ret" -eq "0" ]; do
+#   ret="$?"
+#   if [ "$ret" -eq "100" ] ; then
+#     if [ echo "$result" | grep -q "Unable to locate package" ] ; then
+#       break
+#     fi
+#   fi
+#   current_retries=$((current_retries + 1))
+#   if [ $current_retries -gt $max_retries ] ; then
+#     echo "ERROR: max retries of ${max_retries} reached"
+#     break
+#   fi
+#   echo "== Install package/s failed, retrying ${current_retries}/${max_retries} =="
+#   sleep 5
+# done
+# apt-get clean
