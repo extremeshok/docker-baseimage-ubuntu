@@ -50,7 +50,7 @@ RUN echo "**** install socklog overlay ****" \
   && rm -rf /tmp/socklog-overlay
 
 RUN echo "**** bugfix missing /sbin/ldconfig.real ****" \
-  && ln -s /usr/sbin/ldconfig.real /sbin/ldconfig.real   
+  && ln -s /sbin/ldconfig.real /usr/sbin/ldconfig.real
 
 RUN echo "**** create xs user and make our folders ****" \
   && addgroup --gid 911 --system xs \
