@@ -23,6 +23,7 @@ RUN echo "**** Install packages ****" \
   ca-certificates \
   cron \
   curl \
+  rsync \
   tar \
   wget
 
@@ -31,17 +32,22 @@ RUN echo "**** install s6 overlay ****" \
   && echo "$S6VERSION" \
   && curl --silent -o /tmp/s6-overlay.tar.gz -L \
    "https://github.com/just-containers/s6-overlay/releases/download/${S6VERSION}/s6-overlay-${OVERLAY_ARCH}.tar.gz" \
-  && tar xfz /tmp/s6-overlay.tar.gz -C / --exclude="./bin" \
-  && tar xzf /tmp/s6-overlay.tar.gz -C /usr ./bin \
-  && rm -f /tmp/s6-overlay.tar.gz
+  && mkdir -p /tmp/s6-overlay \
+  && tar xfz /tmp/s6-overlay.tar.gz -C /tmp/s6-overlay \
+  && rsync -h -v -r -P -t --ignore-existing --links /tmp/s6-overlay/ / \
+  && rm -f /tmp/s6-overlay.tar.gz \
+  && rm -rf /tmp/s6-overlay
 
 RUN echo "**** install socklog overlay ****" \
   && SOCKLOGVERSION="$(curl --silent "https://api.github.com/repos/just-containers/socklog-overlay/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')" \
   && echo "$SOCKLOGVERSION" \
   && curl --silent -o /tmp/socklog-overlay.tar.gz -L \
    "https://github.com/just-containers/socklog-overlay/releases/download/${SOCKLOGVERSION}/socklog-overlay-${OVERLAY_ARCH}.tar.gz" \
-  && tar xfz /tmp/socklog-overlay.tar.gz -C / \
-  && rm -f /tmp/socklog-overlay.tar.gz
+  && mkdir -p /tmp/socklog-overlay \
+  && tar xfz /tmp/socklog-overlay.tar.gz -C /tmp/socklog-overlay \
+  && rsync -h -v -r -P -t --ignore-existing --links /tmp/socklog-overlay/ / \
+  && rm -f /tmp/socklog-overlay.tar.gz \
+  && rm -rf /tmp/socklog-overlay
 
 RUN echo "**** create xs user and make our folders ****" \
   && addgroup --gid 911 --system xs \
