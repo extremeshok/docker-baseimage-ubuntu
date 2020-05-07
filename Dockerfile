@@ -49,9 +49,6 @@ RUN echo "**** install socklog overlay ****" \
   && rm -f /tmp/socklog-overlay.tar.gz \
   && rm -rf /tmp/socklog-overlay
 
-RUN echo "**** bugfix missing /sbin/ldconfig.real ****" \
-  && ln -s /sbin/ldconfig.real /usr/sbin/ldconfig.real
-
 RUN echo "**** create xs user and make our folders ****" \
   && addgroup --gid 911 --system xs \
   && adduser --uid 911 --system --disabled-password --ingroup xs --home /config --shell /bin/false xs \
@@ -78,6 +75,9 @@ RUN \
 
 # add local files
 COPY rootfs/ /
+
+RUN echo "**** bugfix missing /sbin/ldconfig.real ****" \
+  && ln -s /usr/sbin/ldconfig.real /sbin/ldconfig.real
 
 RUN chmod 744 /sbin/apt-install
 
