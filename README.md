@@ -2,7 +2,7 @@
 
 https://hub.docker.com/r/extremeshok/baseimage-ubuntu
 
-eXtremeSHOK optimized base Ubuntu 18.04
+eXtremeSHOK optimized base Ubuntu LTS 20.04 
 
 # Built with the latest versions of :
 + [Ubuntu linux](https://ubuntu.org/)

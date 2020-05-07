@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 AS BUILD
+FROM ubuntu:20.04 AS BUILD
 
 LABEL mantainer="Adrian Kriel <admin@extremeshok.com>" vendor="eXtremeSHOK.com"
 
@@ -16,7 +16,7 @@ ENV TERM="xterm"
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN echo "**** install packages ****" \
-  && apt-get update && apt-get install -y --no-install-recommends \
+  && apt-get update && apt-get install -qq -y --no-install-recommends \
     ca-certificates \
     cron \
     curl \
