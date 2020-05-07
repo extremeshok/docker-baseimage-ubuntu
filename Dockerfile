@@ -56,8 +56,16 @@ RUN echo "**** create xs user and make our folders ****" \
 RUN \
   echo "**** cleanup ****" \
   && apt-get clean \
-  && rm -rf /etc/cron.daily/ \
-  && rm -rf /tmp/*
+  && echo "" > /var/log/alternatives.log \
+  && echo "" > /var/log/bootstrap.log \
+  && echo "" > /var/log/dpkg.log \
+  && rm -rf /etc/cron.d/* \
+  && rm -rf /etc/cron.daily/* \
+  && rm -rf /tmp/* \
+  && rm -rf /var/cache/apt/* \
+  && rm -rf /var/cache/debconf/* \
+  && rm -rf /var/cache/ldconfig/* \
+  && rm -rf /var/log/apt/*
 
 # add local files
 COPY rootfs/ /
