@@ -15,9 +15,6 @@ ENV TERM="xterm"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
-RUN echo "**** Non-interactive ****" \
-  && echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-
 RUN echo "**** Upgrade all packages ****" \
   && apt-get update  && apt-get upgrade -y -qq
 
@@ -35,7 +32,7 @@ RUN echo "**** install s6 overlay ****" \
   && curl --silent -o /tmp/s6-overlay.tar.gz -L \
    "https://github.com/just-containers/s6-overlay/releases/download/${S6VERSION}/s6-overlay-${OVERLAY_ARCH}.tar.gz" \
   && tar xfz /tmp/s6-overlay.tar.gz -C / --exclude="./bin" \
-  && tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin \
+  && tar xzf /tmp/s6-overlay.tar.gz -C /usr ./bin \
   && rm -f /tmp/s6-overlay.tar.gz
 
 RUN echo "**** install socklog overlay ****" \
